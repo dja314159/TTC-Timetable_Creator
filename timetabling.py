@@ -24,15 +24,17 @@ for i in range(1):
 
 f = open("2020_CS.txt", 'r')
 
-search = '1A'
-
 while True:
     line = f.readline()
     if not line:
         break
-    print(line)
+    for k in range(18):
+        result = line.find(timealpa[0][k])
+        if result == -1:
+            continue
+        else:
+            print(timealpa[0][k])
+    print()
 
 f.close()
-
-
 
