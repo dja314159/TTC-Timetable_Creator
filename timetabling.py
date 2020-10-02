@@ -9,6 +9,8 @@ for i in time:
 timealpa = [[0]*18] # transform the time (ex: 2A -> 10:00) we will save starting time.
 timenum = [[0]*18]
 startclass = 9
+timeday = list()
+timeday = {'월','화','수','목','금','토'}
 
 for i in range(1):
     for j in range(18):
@@ -30,10 +32,12 @@ while True:
         break
     for k in range(18):
         result = line.find(timealpa[0][k])
+        dayresult = line.find(timeday[k])
         if result == -1:
             continue
         else:
-            print(timealpa[0][k])
+            print(timeday[0][k])
+            print(timealpa[k])
     print()
 
 f.close()
