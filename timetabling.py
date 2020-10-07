@@ -20,18 +20,25 @@ timeday[0][4] = '금'
 timeday[0][5] = '토'
 mainclass = 0
 subclass = 0
+usergrade = 0
 timecount = 0
 timecheck = list()
 daycount = 0
-daycheck = list()
+daycheck = [[-1]*7]*400
 data = list()
+classname = list()
+classnum = list()
+datacount = 0
+gradelist = list()
+mclass = list()
+sclass = list()
 
 class class_info(Structure):
     _fields_ = [('grade',c_int),('gradepoint',c_int),('classbeginf',c_int),('classendf',c_int),('classbegins',c_int),('classends',c_int),('classdatef',c_int),('classdates',c_int),('kind',c_int),('max',c_int),('now',c_int)]
 
 #we will check the time using classbegin and classend. And first option is grade and kind, and then grade, time.
 
-mainclass, subclass = input('write ur class(main sub):  ').split()
+mainclass, subclass, usergrade= input('write ur class(main sub)and grade:  ').split()
 
 for i in range(1):
     for j in range(18):
@@ -60,21 +67,50 @@ while True:
                 timecheck.append(timenum[0][k])
                 timecount = timecount + 1
 
+    daycount = 0
+
     for k in range(6):
         cuttingline = line.split("'")
         dayresult = cuttingline[35].find(timeday[0][k])
         if dayresult == -1:
             continue
         else:
-            daycheck.append(k)
-            daycount = daycount + 1
+            for m in range(daycount+1):
+                if daycheck[datacount][m] == k:
+                    continue
+                else:
+                    daycheck[datacount][daycount] = k
+                    daycount = daycount + 1
+                    print('done')
+    
+    print(cuttingline[35])
+    for i in range(daycount):
+        print(daycheck[datacount][i])
+    
+    print()
 
     if daycount == 2:
-        data.append(class_info(int(cuttingline[3]),int(cuttingline[23]),int(timecheck[0]),int(timecheck[2]),int(timecheck[3]),int(timecheck[5]),int(daycheck[0]),int(daycheck[1]),1,int(cuttingline[47]),int(cuttingline[43])))
+        data.append(class_info(int(cuttingline[3]),int(cuttingline[23]),int(timecheck[0]),int(timecheck[2]),int(timecheck[3]),int(timecheck[5]),int(daycheck[datacount][0]),int(daycheck[datacount][1]),0,int(cuttingline[47]),int(cuttingline[43])))
     else:
-        data.append(class_info(int(cuttingline[3]),int(cuttingline[23]),int(timecheck[0]),int(timecheck[2]),0,0,int(daycheck[1]),10,0,int(cuttingline[47]),int(cuttingline[43])))
+        data.append(class_info(int(cuttingline[3]),int(cuttingline[23]),int(timecheck[0]),int(timecheck[2]),0,0,int(daycheck[datacount][0]),10,1,int(cuttingline[47]),int(cuttingline[43])))
 
-    print('asdf')
+    classname.append(cuttingline[15])
+    classnum.append(cuttingline[11])
+
+    datacount = datacount + 1
+
+
+
+for i in range(int(datacount)):
+    if int(usergrade) == data[i].grade:
+        gradelist.append(i)
+
+for i in gradelist:
+    if data[i].kind == 0:
+        sclass.append(i)
+    else:
+        mclass.append(i)
+
 
 f.close()
 
