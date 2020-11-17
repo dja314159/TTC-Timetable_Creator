@@ -22,7 +22,7 @@ mainclass = 0
 subclass = 0
 usergrade = 0
 timecount = 0
-timecheck = list()
+timecheck = [[0] * 9 ]* 100
 daycount = 0
 daycheck = [[-1]*7]*400
 data = list()
@@ -34,7 +34,7 @@ mclass = list()
 sclass = list()
 
 class class_info(Structure):
-    _fields_ = [('grade',c_int),('gradepoint',c_int),('classbeginf',c_int),('classendf',c_int),('classbegins',c_int),('classends',c_int),('classdatef',c_int),('classdates',c_int),('kind',c_int),('max',c_int),('now',c_int)]
+    _fields_ = [('grade',c_int),('gradepoint',c_int),('classbeginf',c_float),('classendf',c_float),('classbegins',c_float),('classends',c_float),('classdatef',c_float),('classdates',c_int),('kind',c_int),('max',c_int),('now',c_int)]
 
 #we will check the time using classbegin and classend. And first option is grade and kind, and then grade, time.
 
@@ -54,18 +54,25 @@ for i in range(1):
 
 f = open("2020_CS.txt", 'r')
 
+print(timenum)
+
 while True:
     line = f.readline()
+    timeshort = 0
     if not line:
         break
-    for k in range(18):
-        result = line.find(timealpa[0][k])
-        if result == -1:
-            continue
-        else:
-            for m in range(18):
-                timecheck.append(timenum[0][k])
-                timecount = timecount + 1
+    cuttingline = line.replace("월",",").replace("화",",").replace("수",",").replace("목",",").replace("금",",").replace("토",",").split(",")
+    for m in cuttingline:
+        for k in range(18):
+            result = m.find(timealpa[0][k])
+            if result == -1:
+                continue
+            else:
+                timecheck[timecount][timeshort] = timenum[0][k]
+                timeshort = timeshort + 1
+    print(timecheck[timecount])
+    
+    timecount = timecount + 1
 
     daycount = 0
 
@@ -81,29 +88,29 @@ while True:
                 else:
                     daycheck[datacount][daycount] = k
                     daycount = daycount + 1
-                    print('done')
     
     print(cuttingline[35])
-    for i in range(daycount):
-        print(daycheck[datacount][i])
-    
     print()
 
     if daycount == 2:
-        data.append(class_info(int(cuttingline[3]),int(cuttingline[23]),int(timecheck[0]),int(timecheck[2]),int(timecheck[3]),int(timecheck[5]),int(daycheck[datacount][0]),int(daycheck[datacount][1]),0,int(cuttingline[47]),int(cuttingline[43])))
+        data.append(class_info(int(cuttingline[3]),int(cuttingline[23]),float(timecheck[timecount][0]),float(timecheck[timecount][2]),float(timecheck[timecount][3]), float(timecheck[timecount][5]),int(daycheck[datacount][0]),int(daycheck[datacount][1]),0,int(cuttingline[47]),int(cuttingline[43])))
     else:
-        data.append(class_info(int(cuttingline[3]),int(cuttingline[23]),int(timecheck[0]),int(timecheck[2]),0,0,int(daycheck[datacount][0]),10,1,int(cuttingline[47]),int(cuttingline[43])))
+        data.append(class_info(int(cuttingline[3]),int(cuttingline[23]),float(timecheck[timecount][0]),float(timecheck[timecount][7]),0,0,int(daycheck[datacount][0]),10,1,int(cuttingline[47]),int(cuttingline[43])))
 
     classname.append(cuttingline[15])
     classnum.append(cuttingline[11])
 
     datacount = datacount + 1
 
-
-
 for i in range(int(datacount)):
     if int(usergrade) == data[i].grade:
         gradelist.append(i)
+
+print(gradelist)
+
+for i in gradelist:
+    print(classnum[i])
+    print(data[i].classbeginf)
 
 for i in gradelist:
     if data[i].kind == 0:
