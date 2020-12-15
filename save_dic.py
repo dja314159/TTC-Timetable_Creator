@@ -52,26 +52,69 @@ def crawling(html):
 
 if __name__ == "__main__":
 
-    html_com = urlopen(
-        "http://my.knu.ac.kr/stpo/stpo/cour/listLectPln/list.action?search_open_crse_cde=1O02&sub=1O&search_open_yr_trm=20202")
-    html_glso = urlopen(
-        "http://my.knu.ac.kr/stpo/stpo/cour/listLectPln/list.action?search_open_crse_cde=1O0204&sub=1O&search_open_yr_trm=20202")
+    # html_com = urlopen(
+    #     "http://my.knu.ac.kr/stpo/stpo/cour/listLectPln/list.action?search_open_crse_cde=1O02&sub=1O&search_open_yr_trm=20202")
+    # html_glso = urlopen(
+    #     "http://my.knu.ac.kr/stpo/stpo/cour/listLectPln/list.action?search_open_crse_cde=1O0204&sub=1O&search_open_yr_trm=20202")
+    #
+    # com = dict()
+    # glso = dict()
+    #
+    # com = crawling(html_com)
+    # glso = crawling(html_glso)
 
-    com = dict()
-    glso = dict()
+    # 읽어오기
+    file = open("COM.bin", "rb")
+    content_com = pickle.load(file)
 
-    com = crawling(html_com)
-    glso = crawling(html_glso)
+    # 읽어오기
+    file = open("GLSO.bin", "rb")
+    content_glso = pickle.load(file)
+
+
+    for i in range(0,len(content_com)):
+        content_com[i]["selected"] = "N"
+
+
+    for i in range(0,len(content_glso)):
+        content_glso[i]["selected"] = "N"
+
+    for lec in content_com:
+        if lec["교과목번호"] == "MTED231002":
+            lec["담당교수"] = "아난드 폴"
+            lec["강의시간"] = "월2B,3A,3B수1A,1B,2A"
+        elif lec["교과목번호"] == "COME301012":
+            lec["담당교수"] = "아난드 폴"
+            lec["강의시간"] = "월1A,1B,2A수2B,3A,3B"
+        elif lec["교과목번호"] == "COMP432001":
+            lec["교과목명"] = "소프트웨어 특강"
+            lec["학점"] = "2"
+            lec["강의"] = "2"
+            lec["실습"] = "0"
+            lec["담당교수"] = "정원일"
+            lec["강의시간"] = "화5A,5B화6A,6B"
+
+    for lec in content_glso:
+        if lec["교과목번호"] == "STUP212002":
+            lec["교과목명"] = "창업과 경영"
+            lec["학점"] = "3"
+            lec["강의"] = "3"
+            lec["실습"] = "0"
+            lec["담당교수"] = "박귀정"
+            lec["강의시간"] = "화7A,7B,8A목7A,7B,8A"
+
 
     # 심컴 쓰기
     file = open("COM.bin", "wb+")
-    pickle.dump(com, file)
+    pickle.dump(content_com, file)
     file.close()
 
-    #심컴 쓰기
+    #글솝 쓰기
     file=open("GLSO.bin","wb+")
-    pickle.dump(glso,file)
+    pickle.dump(content_glso,file)
     file.close()
+
+
 
 
     #읽어오기
