@@ -1,6 +1,6 @@
 # TTC : Timetable Creator
 <div>
-	<img width = "800" src = "https://user-images.githubusercontent.com/62656584/102291314-33abd980-3f86-11eb-81a4-7f272f9fd0cd.png">
+	<img width = "600" src = "https://user-images.githubusercontent.com/62656584/102291554-b6349900-3f86-11eb-9e43-6d2066e2fff9.png">
 </div><br>
 
 
