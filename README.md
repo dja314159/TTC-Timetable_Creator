@@ -27,7 +27,7 @@ TTC에 대해
 
 사용자들은시간표를 생성하기 위해 순차적인 과정을 따릅니다.<br>
 <div>
-	<img width = "600" src = "https://user-images.githubusercontent.com/62656584/102176851-a1ec8f80-3ee5-11eb-9438-899a4cb05f7a.png">
+	<img width = "600" src = "https://user-images.githubusercontent.com/62656584/102298599-c784a200-3f94-11eb-96f1-67384cdced93.png">
 </div><br>
 
 1. 로그인을 통해 웹페이지에 접속한다.<br>
