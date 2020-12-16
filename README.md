@@ -1,4 +1,11 @@
 # TTC : Timetable Creator
+<div>
+	<img width = "800" src = "https://user-images.githubusercontent.com/62656584/102291314-33abd980-3f86-11eb-81a4-7f272f9fd0cd.png>
+</div><br>
+
+
+
+
 컴퓨터학부 학생을 위한 시간표 자동생성 서비스:
 - 2020-2 소프트웨어설계 1팀 
 - 사용자 기반의 시간표 자동생성서비스 
