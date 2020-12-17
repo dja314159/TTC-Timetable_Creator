@@ -1,7 +1,8 @@
-# coding = utf-8
+# -*- coding: utf-8 -*-
 
 from flask import Flask,render_template
 import pickle
+from ctypes import*
 
 
 app = Flask(__name__)
@@ -160,26 +161,71 @@ def lecture_collect():
         i -= 1
 
 
-
-    # for문 돌면서 강의 시간에 기피 시간 없는것만 새 리스트에 삽입
-    temp_list = list()
-    for lect in temp_lecture:
-        check = 0
-        for time in time_list:
-            if lect["강의시간"].find(time) != -1:
-                check += 1
-        if check == 0:
-            temp_list.append(lect)
-
     lecture = temp_list
 
     for lect in lecture:
         print(lect)
+    
+    sendlec = [[0]*100]*7
+    day = [[0]*4]
+    timesort = [[0]*100]
+    timesave = [[0]*28]
+    daysave = [[0]*5]
+    sortcount = 0
+    count = -1
+    count_t = 0
+    daycount = 0
+    formation = 0
+    formation_d = 0
+    daykor = ['월','화','수','목','금','토','일']
+    timeeng = ['1A','1B','2A','2B','3A','3B','4A','4B','5A','5B','6A','6B','7A','7B','8A','8B','9A','9B','10A','10B','11A','11B','12A','12B','13A','13B','14A']
+
+    for i in range(7):
+        for j in range(100):
+            sendlec[i][j] = 0  #시간표 초기화 작업
+    
+    for lect in lecture:
+        for kor in daykor:
+            if(lect.find(kor) != -1):
+                daysave[0][daycount] = kor
+                daycount = daycount + 1
+        count = count + 1
+
+        if(daycount == 1):
+            for time in timeeng:
+                 if(lect.find(time) != -1):
+                     cuttingline = lect.split("'")
+                     formation_d = daykor.find(daysave[0][0])
+                     sendlec[formation_d][count_t] = cuttingline[14]
+                 count_t = count_t + 1
+
+        if(daycount == 2):
+            for time in timeeng:
+                formation = lect.find(time)
+                if(formation != -1):
+                    timesort[0][sortcount] = formation
+                    timesave[0][sortcount] = time
+                    sortcount = sortcount + 1
+
+            for size in reversed(range(sortcount)):
+                for i in range(size):
+                    if timesort[0][i] > timesort[0][i+1]:
+                        timesort[0][i],timesort[0][i+1] = timesort[0][i+1],timesort[0][i]
+                        timesave[0][i],timesave[0][i+1] = timesave[0][i+1],timesort[0][i]
+
+            for i in range(daycount):
+                formation_d = daykor.find(daysave[0][i])
+                if i == 0:
+                    formation = timeeng.find(timesave[0][0])
+                    sendlec[formation_d][count_t] = cuttingline[14]
+                    formation = timeeng.find(timesave[0][1])
+                    sendlec[formation_d][count_t] = cuttingline[14]
+                    formation = timeeng.find(timesave[0][2])
+                    sendlec[formation_d][count_t] =  cuttingline[14]
 
 
 
-
-
+        
 
 
 
@@ -199,7 +245,7 @@ def option():
 
 @app.route("/table.html")
 def table():
-    return render_template("table.html")
+    return render_template("table.html", sendlec)
 
 
 
