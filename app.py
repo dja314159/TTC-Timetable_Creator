@@ -3,6 +3,7 @@
 from flask import Flask,render_template
 import pickle
 from ctypes import*
+import numpy as np
 
 
 app = Flask(__name__)
@@ -167,7 +168,11 @@ def lecture_collect():
         print(lect)
    
     global sendlec
-    sendlec = [[0]*100]*7
+    sendlec = np.arange(700).reshape(7,100)
+    sendlec = np.array(sendlec, dtype = str)
+    for i in range(7):
+        for j in range(100):
+            sendlec[i][j] = ""
     day = [[0]*4]
     timesort = [[0]*100]
     timesave = [[0]*28]
@@ -180,10 +185,6 @@ def lecture_collect():
     formation_d = 0
     daykor = ['월','화','수','목','금','토','일']
     timeeng = ['1A','1B','2A','2B','3A','3B','4A','4B','5A','5B','6A','6B','7A','7B','8A','8B','9A','9B','10A','10B','11A','11B','12A','12B','13A','13B','14A']
-
-    for i in range(7):
-        for j in range(100):
-            sendlec[i][j] = ""  #시간표 초기화 작업
     
     global lect_num
     lect_num = list()
@@ -227,8 +228,11 @@ def lecture_collect():
                          if(daykor[i] == daysave[0][0]):
                              formation_d = i
                              sendlec[formation_d][count_t] = cuttingline[15]
-                             print(cuttingline[15])
+                             print(formation_d)
+                             print(count_t)
+                             print(sendlec[formation_d][count_t])
                  count_t = count_t + 1
+
 
 
 
