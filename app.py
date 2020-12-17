@@ -184,7 +184,8 @@ def lecture_collect():
         for j in range(100):
             sendlec[i][j] = 0  #시간표 초기화 작업
     
-    for lect in lecture:
+    for k in lecture:
+        lect = k['강의시간']
         for kor in daykor:
             if(lect.find(kor) != -1):
                 daysave[0][daycount] = kor
@@ -195,7 +196,9 @@ def lecture_collect():
             for time in timeeng:
                  if(lect.find(time) != -1):
                      cuttingline = lect.split("'")
-                     formation_d = daykor.find(daysave[0][0])
+                     for i in range(27):
+                         if daykor[i] == daysave[0][0]:
+                             formation_d = i
                      sendlec[formation_d][count_t] = cuttingline[14]
                  count_t = count_t + 1
 
@@ -214,7 +217,9 @@ def lecture_collect():
                         timesave[0][i],timesave[0][i+1] = timesave[0][i+1],timesort[0][i]
 
             for i in range(daycount):
-                formation_d = daykor.find(daysave[0][i])
+                for j in range(27):
+                    if daykor[j] == daysave[0][i]:
+                        formation_d = j
                 if i == 0:
                     formation = timeeng.find(timesave[0][0])
                     sendlec[formation_d][count_t] = cuttingline[14]
