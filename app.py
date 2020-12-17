@@ -183,7 +183,7 @@ def lecture_collect():
 
     for i in range(7):
         for j in range(100):
-            sendlec[i][j] = 0  #시간표 초기화 작업
+            sendlec[i][j] = ""  #시간표 초기화 작업
     
     global lect_num
     lect_num = list()
@@ -224,12 +224,11 @@ def lecture_collect():
             for time in timeeng:
                  if(lect.find(time) != -1):
                      for i in range(7):
-                         if daykor[i] == daysave[0][0]:
+                         if(daykor[i] == daysave[0][0]):
                              formation_d = i
-                     for j in range(27):
-                         if time == timeeng[j]:
-                             count_t = j
-                     sendlec[formation_d][count_t] = cuttingline[15]
+                             sendlec[formation_d][count_t] = cuttingline[15]
+                             print(cuttingline[15])
+                 count_t = count_t + 1
 
 
 
