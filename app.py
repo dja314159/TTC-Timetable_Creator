@@ -165,7 +165,8 @@ def lecture_collect():
 
     for lect in lecture:
         print(lect)
-    
+   
+    global sendlec
     sendlec = [[0]*100]*7
     day = [[0]*4]
     timesort = [[0]*100]
@@ -184,10 +185,37 @@ def lecture_collect():
         for j in range(100):
             sendlec[i][j] = 0  #시간표 초기화 작업
     
+    global lect_num
+    lect_num = list()
+    global lect_name 
+    lect_name = list()
+    global lect_pf 
+    lect_pf = list()
+    global lect_time 
+    lect_time = list()
+    
+    for sub in lecture:
+        print(sub['교과목번호'])
+        lect_num.append(sub['교과목번호'])
+        lect_name.append(sub['교과목명'])
+        lect_pf.append(sub['담당교수'])
+        lect_time.append(sub['강의시간'])
+
+
     for k in lecture:
+        cuttingline = str(k).split("'")
+        print(cuttingline[15])
+        sortcount = 0
+        count = -1
+        count_t = 0
+        daycount = 0
+        formation = 0
+        formation_d = 0
         lect = k['강의시간']
+        print(lect)
         for kor in daykor:
             if(lect.find(kor) != -1):
+                print(kor)
                 daysave[0][daycount] = kor
                 daycount = daycount + 1
         count = count + 1
@@ -195,38 +223,43 @@ def lecture_collect():
         if(daycount == 1):
             for time in timeeng:
                  if(lect.find(time) != -1):
-                     cuttingline = lect.split("'")
-                     for i in range(27):
+                     for i in range(7):
                          if daykor[i] == daysave[0][0]:
                              formation_d = i
-                     sendlec[formation_d][count_t] = cuttingline[14]
-                 count_t = count_t + 1
+                     for j in range(27):
+                         if time == timeeng[j]:
+                             count_t = j
+                     sendlec[formation_d][count_t] = cuttingline[15]
 
-        if(daycount == 2):
-            for time in timeeng:
-                formation = lect.find(time)
-                if(formation != -1):
-                    timesort[0][sortcount] = formation
-                    timesave[0][sortcount] = time
-                    sortcount = sortcount + 1
 
-            for size in reversed(range(sortcount)):
-                for i in range(size):
-                    if timesort[0][i] > timesort[0][i+1]:
-                        timesort[0][i],timesort[0][i+1] = timesort[0][i+1],timesort[0][i]
-                        timesave[0][i],timesave[0][i+1] = timesave[0][i+1],timesort[0][i]
 
-            for i in range(daycount):
-                for j in range(27):
-                    if daykor[j] == daysave[0][i]:
-                        formation_d = j
-                if i == 0:
-                    formation = timeeng.find(timesave[0][0])
-                    sendlec[formation_d][count_t] = cuttingline[14]
-                    formation = timeeng.find(timesave[0][1])
-                    sendlec[formation_d][count_t] = cuttingline[14]
-                    formation = timeeng.find(timesave[0][2])
-                    sendlec[formation_d][count_t] =  cuttingline[14]
+    print(sendlec)
+
+        #if(daycount == 2):
+            #for time in timeeng:
+                #formation = lect.find(time)
+                #if(formation != -1):
+                    #timesort[0][sortcount] = formation
+                    #timesave[0][sortcount] = time
+                    #sortcount = sortcount + 1
+
+            #for size in reversed(range(sortcount)):
+                #for i in range(size):
+                    #if timesort[0][i] > timesort[0][i+1]:
+                        #timesort[0][i],timesort[0][i+1] = timesort[0][i+1],timesort[0][i]
+                        #timesave[0][i],timesave[0][i+1] = timesave[0][i+1],timesort[0][i]
+
+            #for i in range(daycount):
+                #for j in range(27):
+                    #if daykor[j] == daysave[0][i]:
+                        #formation_d = j
+                #if i == 0:
+                   # formation = timeeng.find(timesave[0][0])
+                   # sendlec[formation_d][count_t] = cuttingline[14]
+                   # formation = timeeng.find(timesave[0][1])
+                   # sendlec[formation_d][count_t] = cuttingline[14]
+                   # formation = timeeng.find(timesave[0][2])
+                   # sendlec[formation_d][count_t] =  cuttingline[14]
 
 
 
@@ -250,11 +283,11 @@ def option():
 
 @app.route("/table.html")
 def table():
-    return render_template("table.html", sendlec)
+    return render_template("table.html",data = sendlec)
 
-@app.route("/List.html")
+@app.route("/List.html", methods=['GET','POST'])
 def list_():
-    return render_template("List.html")
+    return render_template("List.html", num = lect_num, name = lect_name, pf = lect_pf, time = lect_time)
 
 
 
