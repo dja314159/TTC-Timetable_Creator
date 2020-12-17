@@ -10,7 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
-	
+
 
 		<style>
 		.checkbox {
@@ -19,7 +19,7 @@
 		  margin: 0 1rem 0 0;
 		  cursor: pointer;
 		}
-		
+
 		.checkbox:before {
 		  -webkit-transition: all 0.3s ease-in-out;
 		  -moz-transition: all 0.3s ease-in-out;
@@ -32,7 +32,7 @@
 		  height: 1rem;
 		  border: 2px solid #f2f2f2;
 		}
-		
+
 		.checkbox:checked:before {
 		  -webkit-transform: rotate(-45deg);
 		  -moz-transform: rotate(-45deg);
@@ -44,7 +44,7 @@
 		  border-top-style: none;
 		  border-right-style: none;
 		}
-		
+
 		.checkbox:after {
 		  content: "";
 		  position: absolute;
@@ -55,7 +55,7 @@
 		  background: #fff;
 		  cursor: pointer;
 		}
-		
+
 		.wrapper {
 		  width: 960px;
 		  margin: 50px auto;
@@ -70,7 +70,7 @@
                                   font-weight:bold;text-align:center;vertical-align:top}
                                 .tg .tg-kmme{color:aliceblue;background-color:#6cc091;border-color:inherit;font-size:large;font-family:"Nanum Gothic";text-align:center;vertical-align:top}
                                 .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-        
+
 		</style>
 		<link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
 	</head>
@@ -83,7 +83,7 @@
 					<a href="index.html" class="logo"><strong>1 Team Project</strong></a>
 					<nav id="nav">
 						<a href="index.html">Home</a>
-						
+
 					</nav>
 					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 				</div>
@@ -101,23 +101,23 @@
 					<hr class="major" />
 
 					<!-- Elements -->
-						<h2 id="elements">설정을 기반으로 한 시간표 입니다.</h2>
+						<h2 id="elements">중복으로 있는 과목 중 하나를 선택해 주세요</h2>
 						<div class="row 200%">
-							
+
                                 <table class="tg">
                                 <thead>
                                   <tr>
                                     <th class="tg-rcci"></th>
-                                    <th class="tg-kmme">월요일</th>
-                                    <th class="tg-kmme">화요일</th>
-                                    <th class="tg-kmme">수요일</th>
-                                    <th class="tg-kmme">목요일</th>
-                                    <th class="tg-kmme">금요일</th>
+                                    <th class="tg-kmme">과목코드</th>
+                                    <th class="tg-kmme">과목명</th>
+                                    <th class="tg-kmme">교수이름</th>
+                                    <th class="tg-kmme">강의시간</th>
+                                    <th class="tg-kmme">비고</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td class="tg-c3ow">1A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox1"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -125,7 +125,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">1B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox2"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -133,7 +133,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">2A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox3"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -141,7 +141,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">2B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox4"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -149,7 +149,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">3A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox5"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -157,7 +157,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">3B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox6"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -165,7 +165,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">4A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox7"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -173,7 +173,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">4B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox8"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -181,7 +181,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">5A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox9"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -189,7 +189,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">5B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox10"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -197,7 +197,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">6A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox11"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -205,7 +205,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">6B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox12"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -213,7 +213,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">7A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox13"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -221,7 +221,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">7B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox14"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -229,7 +229,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">8A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox15"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -237,7 +237,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">8B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox16"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -245,7 +245,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">9A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox17"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -253,7 +253,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">9B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox18"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -261,7 +261,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">10A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox19"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -269,7 +269,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">10B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox20"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -277,7 +277,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">11A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox21"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -285,7 +285,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">11B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox22"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -293,7 +293,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">12A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox23"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -301,7 +301,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">12B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox24"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -309,7 +309,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">13A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox25"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -317,7 +317,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">13B</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox26"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -325,7 +325,7 @@
                                     <td class="tg-0pky"></td>
                                   </tr>
                                   <tr>
-                                    <td class="tg-c3ow">14A</td>
+                                    <td class="tg-c3ow"><input type="checkbox" name="checkbox27"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
                                     <td class="tg-0pky"></td>
@@ -335,12 +335,21 @@
                                 </tbody>
                                 </table>
 
-							
+                            <div class="inner">
+										<div class="flex flex-2">
+											<article>
+												<footer>
+													<a href="table.html" class="button">시간표 생성</a>
+												</footer>
+											</article>
+										</div>
+									  </div>
 
-									  
-							
 
-								
+
+
+
+
 
 						</div>
 					</div>

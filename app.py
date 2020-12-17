@@ -247,6 +247,10 @@ def option():
 def table():
     return render_template("table.html", sendlec)
 
+@app.route("/List.html")
+def list_():
+    return render_template("List.html")
+
 
 
 
