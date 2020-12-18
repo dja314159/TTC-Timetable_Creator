@@ -54,8 +54,6 @@ def crawling(f,html):
 
     f.close()
 
-
-
 def com_com():
     f = open("data/2020_심컴.txt", 'w', encoding='utf-8')
     html = urlopen("http://my.knu.ac.kr/stpo/stpo/cour/listLectPln/list.action?search_open_crse_cde=1O02&sub=1O&search_open_yr_trm=20202")
