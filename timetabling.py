@@ -118,6 +118,4 @@ for i in gradelist:
     else:
         mclass.append(i)
 
-
 f.close()
-
