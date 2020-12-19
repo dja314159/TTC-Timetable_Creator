@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask,render_template
+from flask import Flask,render_template, request
 import pickle
 from ctypes import*
 import numpy as np
@@ -8,9 +8,20 @@ import numpy as np
 
 app = Flask(__name__)
 
+global major
+major = 1
+global lect_num
+lect_num = list()
+global lect_name
+lect_name = list()
+global lect_pf
+lect_pf = list()
+global lect_time
+lect_time =list()
+
 def lecture_collect():
     #원래는 웹에서 정보를 받아오지만 test용으로 인자 미리 지정
-    major = 2 #1: 심컴, 2: 글솝
+    major = 2#1: 심컴, 2: 글솝
     grade = 2
     avoid_day = 16 #2^4 -> 금요일
     avoid_time = 3 #2^0 + 2^1 -> 1A, 1B
@@ -186,14 +197,6 @@ def lecture_collect():
     daykor = ['월','화','수','목','금','토','일']
     timeeng = ['1A','1B','2A','2B','3A','3B','4A','4B','5A','5B','6A','6B','7A','7B','8A','8B','9A','9B','10A','10B','11A','11B','12A','12B','13A','13B','14A']
     
-    global lect_num
-    lect_num = list()
-    global lect_name 
-    lect_name = list()
-    global lect_pf 
-    lect_pf = list()
-    global lect_time 
-    lect_time = list()
     
     for sub in lecture:
         print(sub['교과목번호'])
@@ -280,8 +283,11 @@ def init():
 def home():
     return render_template("index.html")
 
-@app.route("/TTC.html")
+@app.route("/TTC.html", methods=['GET','POST'])
 def option():
+    if(request.method == 'POST'):
+        major = request.args["major"]
+        major = int(major)
     return render_template("TTC.html")
 
 @app.route("/table.html")
@@ -290,11 +296,11 @@ def table():
 
 @app.route("/List.html", methods=['GET','POST'])
 def list_():
+    lecture_collect()
     return render_template("List.html", num = lect_num, name = lect_name, pf = lect_pf, time = lect_time)
 
 
 
 
 if __name__ == "__main__":
-    lecture_collect()
     app.run()
