@@ -8,8 +8,6 @@ import numpy as np
 
 app = Flask(__name__)
 
-global major
-major = 1
 global lect_num
 lect_num = list()
 global lect_name
@@ -20,9 +18,8 @@ global lect_time
 lect_time =list()
 
 def lecture_collect():
-    #원래는 웹에서 정보를 받아오지만 test용으로 인자 미리 지정
-    major = 2#1: 심컴, 2: 글솝
-    grade = 2
+    major = 2#원래는 웹에서 정보를 받아오지만 test용으로 인자 미리 지정
+    grade = 2#1: 심컴, 2: 글솝
     avoid_day = 16 #2^4 -> 금요일
     avoid_time = 3 #2^0 + 2^1 -> 1A, 1B
 
@@ -185,9 +182,12 @@ def lecture_collect():
         for j in range(100):
             sendlec[i][j] = ""
     day = [[0]*4]
-    timesort = [[0]*100]
-    timesave = [[0]*28]
-    daysave = [[0]*5]
+    timesort = np.arange(100).reshape(1,100)
+    timesort = np.array(timesort, dtype = int)
+    timesave = np.arange(28).reshape(1,28)
+    timesave = np.array(timesave, dtype = str)
+    daysave = np.arange(5).reshape(1,5)
+    daysave = np.array(daysave, dtype = str)
     sortcount = 0
     count = -1
     count_t = 0
@@ -235,43 +235,39 @@ def lecture_collect():
                              print(count_t)
                              print(sendlec[formation_d][count_t])
                  count_t = count_t + 1
+        elif(daycount == 2):
+            for time in timeeng:
+                formation = lect.find(time)
+                if(formation != -1):
+                    timesort[0][sortcount] = formation
+                    timesave[0][sortcount] = time
+                    sortcount = sortcount + 1
 
+            for size in reversed(range(sortcount)):
+                for i in range(size):
+                    if(timesort[0][i] > timesort[0][i+1]):
+                        timesort[0][i], timesort[0][i+1] = timesort[0][i+1], timesort[0][i]
+                        timesave[0][i], timesave[0][i+1] = timesave[0][i+1], timesave[0][i]
 
-
-
-    print(sendlec)
-
-        #if(daycount == 2):
-            #for time in timeeng:
-                #formation = lect.find(time)
-                #if(formation != -1):
-                    #timesort[0][sortcount] = formation
-                    #timesave[0][sortcount] = time
-                    #sortcount = sortcount + 1
-
-            #for size in reversed(range(sortcount)):
-                #for i in range(size):
-                    #if timesort[0][i] > timesort[0][i+1]:
-                        #timesort[0][i],timesort[0][i+1] = timesort[0][i+1],timesort[0][i]
-                        #timesave[0][i],timesave[0][i+1] = timesave[0][i+1],timesort[0][i]
-
-            #for i in range(daycount):
-                #for j in range(27):
-                    #if daykor[j] == daysave[0][i]:
-                        #formation_d = j
-                #if i == 0:
-                   # formation = timeeng.find(timesave[0][0])
-                   # sendlec[formation_d][count_t] = cuttingline[14]
-                   # formation = timeeng.find(timesave[0][1])
-                   # sendlec[formation_d][count_t] = cuttingline[14]
-                   # formation = timeeng.find(timesave[0][2])
-                   # sendlec[formation_d][count_t] =  cuttingline[14]
-
-
-
+            for i in range(daycount):
+                for j in range(7):
+                    if(daykor[j] == daysave[0][i]):
+                        formation_d = j
+                        for k in range(sortcount):
+                            for m in range(27):
+                                if(timesave[0][k] == timeeng[m]):
+                                    count_t = m
+                                    sendlec[formation_d][count_t] = cuttingline[15]
         
 
-
+def get_option():
+    global major
+    global grade
+    if(request.method == 'POST'):
+        major = request.form['major']
+        major = int(major)
+        if(major == 0):
+            print("asdfasdF")
 
 
 
@@ -285,9 +281,6 @@ def home():
 
 @app.route("/TTC.html", methods=['GET','POST'])
 def option():
-    if(request.method == 'POST'):
-        major = request.args["major"]
-        major = int(major)
     return render_template("TTC.html")
 
 @app.route("/table.html")
@@ -296,6 +289,7 @@ def table():
 
 @app.route("/List.html", methods=['GET','POST'])
 def list_():
+    get_option()
     lecture_collect()
     return render_template("List.html", num = lect_num, name = lect_name, pf = lect_pf, time = lect_time)
 
