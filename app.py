@@ -253,12 +253,12 @@ def lecture_collect():
                 for j in range(7):
                     if(daykor[j] == daysave[0][i]):
                         formation_d = j
-                        for k in range(sortcount):
+                        for k in range(6):
                             for m in range(27):
                                 if(timesave[0][k] == timeeng[m]):
                                     count_t = m
                                     sendlec[formation_d][count_t] = cuttingline[15]
-        
+           
 
 def get_option():
     global major
