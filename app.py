@@ -19,7 +19,7 @@ lect_time =list()
 
 def lecture_collect():
     major = 2#원래는 웹에서 정보를 받아오지만 test용으로 인자 미리 지정
-    grade = 2#1: 심컴, 2: 글솝
+    grade = 3#1: 심컴, 2: 글솝
     avoid_day = 16 #2^4 -> 금요일
     avoid_time = 3 #2^0 + 2^1 -> 1A, 1B
 
